@@ -34,7 +34,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
             <div className="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center">
               <User className="w-5 h-5 text-white" />
             </div>
-            <span className="text-gray-900 text-lg font-bold">SITE LOGO AND SITE NAME</span>
+            <span className="text-gray-900 text-lg font-bold">EduPilot</span>
           </div>
 
           {/* Navigation Pills - Right Side */}
@@ -73,7 +73,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
               <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
                 <User className="w-5 h-5 text-gray-900" />
               </div>
-              <span className="text-white text-sm font-bold">SITE LOGO AND SITE NAME</span>
+              <span className="text-white text-sm font-bold">EduPilot</span>
             </div>
             
             <button

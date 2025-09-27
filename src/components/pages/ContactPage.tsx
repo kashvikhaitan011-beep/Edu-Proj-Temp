@@ -6,29 +6,31 @@ export const ContactPage: React.FC = () => {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Handle form submission here
-    alert('Thank you for your message! We\'ll get back to you soon.');
+
+    alert("Thank you for your message! We'll get back to you soon.");
     setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-6 pt-36 pb-12">
         <h1 className="text-4xl md:text-6xl font-bold text-center mb-16 text-gray-900">
-          Contact US
+          Contact Us
         </h1>
 
         <div className="max-w-6xl mx-auto">
@@ -38,7 +40,8 @@ export const ContactPage: React.FC = () => {
                 INNOVATE YOURSELF AND MAKE A GOOD CONTACT US SECTION
               </h2>
               <p className="text-gray-600 text-lg">
-                Get in touch with us for any questions, feedback, or collaboration opportunities.
+                Get in touch with us for any questions, feedback, or collaboration
+                opportunities.
               </p>
             </div>
 
@@ -47,7 +50,10 @@ export const ContactPage: React.FC = () => {
               <div>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-gray-700 font-semibold mb-2"
+                    >
                       Full Name
                     </label>
                     <input
@@ -63,7 +69,10 @@ export const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-gray-700 font-semibold mb-2"
+                    >
                       Email Address
                     </label>
                     <input
@@ -79,7 +88,10 @@ export const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-gray-700 font-semibold mb-2">
+                    <label
+                      htmlFor="subject"
+                      className="block text-gray-700 font-semibold mb-2"
+                    >
                       Subject
                     </label>
                     <input
@@ -95,7 +107,10 @@ export const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-gray-700 font-semibold mb-2">
+                    <label
+                      htmlFor="message"
+                      className="block text-gray-700 font-semibold mb-2"
+                    >
                       Message
                     </label>
                     <textarea
@@ -123,10 +138,12 @@ export const ContactPage: React.FC = () => {
               {/* Contact Information */}
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Get In Touch</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                    Get In Touch
+                  </h3>
                   <p className="text-gray-600 leading-relaxed mb-8">
-                    Ready to start your learning journey with us? We'd love to hear from you. 
-                    Send us a message and we'll respond as soon as possible.
+                    Ready to start your learning journey with us? We'd love to hear
+                    from you. Send us a message and we'll respond as soon as possible.
                   </p>
                 </div>
 
@@ -177,7 +194,7 @@ export const ContactPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>  
     </div>
   );
 };

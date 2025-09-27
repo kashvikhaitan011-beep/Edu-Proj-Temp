@@ -35,14 +35,8 @@ export const AIHubPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="container mx-auto px-6 py-8">
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <div className="w-8 h-8 bg-gray-900 rounded-full"></div>
-            <span className="text-lg font-bold text-gray-700">SITE LOGO AND SITE NAME</span>
-          </div>
-        </div>
-
+      {/* Add padding so content does not overlap with navbar */}
+      <div className="container mx-auto px-6 pt-36 pb-12">
         <h1 className="text-4xl font-bold text-center mb-12 text-gray-900">
           AI Hub
         </h1>
@@ -61,7 +55,7 @@ export const AIHubPage: React.FC = () => {
                 <h3 className="text-xl font-bold text-gray-900 mb-4">{tool.name}</h3>
                 <p className="text-gray-700 text-sm leading-relaxed">{tool.description}</p>
               </div>
-              
+
               <div className="mt-8">
                 <button className="w-full bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-xl font-semibold transition-colors">
                   Launch Tool
