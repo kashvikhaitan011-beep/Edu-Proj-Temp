@@ -19,25 +19,19 @@ export const LiveClassesPage: React.FC = () => {
           return prev;
         }
 
-        if (seconds > 0) {
-          seconds--;
-        } else {
+        if (seconds > 0) seconds--;
+        else {
           seconds = 59;
-          if (minutes > 0) {
-            minutes--;
-          } else {
+          if (minutes > 0) minutes--;
+          else {
             minutes = 59;
-            if (hours > 0) {
-              hours--;
-            } else {
+            if (hours > 0) hours--;
+            else {
               hours = 23;
-              if (days > 0) {
-                days--;
-              }
+              if (days > 0) days--;
             }
           }
         }
-
         return { days, hours, minutes, seconds };
       });
     }, 1000);
@@ -46,40 +40,46 @@ export const LiveClassesPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-6 pt-36 pb-12">
+    <div className="min-h-screen bg-[#e9ecef] text-[#1e1e1e]">
+      <div className="container mx-auto px-6 pt-28 pb-12">
         {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#1e1e1e]">
             Live Classes
           </h1>
+          <p className="text-[#495057] mt-2 text-lg">
+            Stay updated with schedules, announcements & requests
+          </p>
         </div>
 
-        {/* Upcoming Class Details */}
-        <div className="bg-blue-200 p-8 rounded-3xl mb-12 shadow-md">
+        {/* Upcoming Class */}
+        <div className="bg-[#a5d8ff] p-8 rounded-3xl mb-14 shadow-lg">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">
-              Upcoming Class Details
-            </h2>
-            <button className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-6 py-2 rounded-lg font-semibold transition-colors">
+            <h2 className="text-2xl font-bold">Upcoming Class</h2>
+            <button className="bg-[#ff8787] hover:bg-[#ffc9c9] text-white px-6 py-2 rounded-xl font-semibold shadow-md transition">
               Join Now
             </button>
           </div>
 
           <div className="text-center">
-            <h3 className="text-4xl font-bold text-gray-900 mb-8">COUNTDOWN</h3>
-            <div className="flex justify-center gap-8 text-center">
+            <h3 className="text-3xl font-bold mb-6 text-[#1e1e1e]">
+              Countdown to Start
+            </h3>
+            <div className="flex justify-center gap-6">
               {[
                 { label: 'Days', value: countdown.days },
                 { label: 'Hours', value: countdown.hours },
                 { label: 'Minutes', value: countdown.minutes },
                 { label: 'Seconds', value: countdown.seconds },
               ].map((item, idx) => (
-                <div key={idx}>
-                  <div className="text-3xl font-bold text-gray-900">
+                <div
+                  key={idx}
+                  className="bg-[#fff4e6] rounded-xl px-5 py-4 shadow-md"
+                >
+                  <div className="text-3xl font-bold text-[#1e1e1e]">
                     {item.value}
                   </div>
-                  <div className="text-sm text-gray-700">{item.label}</div>
+                  <div className="text-sm text-[#495057]">{item.label}</div>
                 </div>
               ))}
             </div>
@@ -89,25 +89,23 @@ export const LiveClassesPage: React.FC = () => {
         {/* Bottom Section */}
         <div className="grid md:grid-cols-3 gap-8">
           {/* Calendar */}
-          <div className="bg-gray-100 p-6 rounded-2xl shadow-sm">
-            <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <Calendar className="w-5 h-5" />
-              CALENDAR
+          <div className="bg-[#ffffff] p-6 rounded-2xl shadow-md">
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+              <Calendar className="w-5 h-5 text-[#ff8787]" />
+              Calendar
             </h3>
-            <p className="text-sm text-gray-600 mb-4">
-              (Click a date to see deadlines & to-dos)
+            <p className="text-sm text-[#495057] mb-4">
+              Click a date to see deadlines & to-dos
             </p>
-            <div className="bg-white p-4 rounded-lg border">
-              <div className="grid grid-cols-7 gap-1 text-xs text-center">
+            <div className="bg-[#f8f9fa] p-4 rounded-xl border border-[#e9ecef]">
+              <div className="grid grid-cols-7 gap-2 text-xs text-center font-semibold">
                 {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
-                  <div key={i} className="p-2 font-semibold">
-                    {day}
-                  </div>
+                  <div key={i} className="p-2 text-[#1e1e1e]">{day}</div>
                 ))}
                 {Array.from({ length: 35 }).map((_, i) => (
                   <div
                     key={i}
-                    className="p-2 hover:bg-blue-100 rounded cursor-pointer"
+                    className="p-2 rounded-lg hover:bg-[#ffd8a8] cursor-pointer"
                   >
                     {i < 30 ? i + 1 : ''}
                   </div>
@@ -117,40 +115,39 @@ export const LiveClassesPage: React.FC = () => {
           </div>
 
           {/* Reschedule Request */}
-          <div className="bg-gray-50 p-6 rounded-2xl border-2 border-gray-200 shadow-sm">
-            <h3 className="font-bold text-gray-900 mb-4">
-              Request Class Reschedule
+          <div className="bg-[#fff4e6] p-6 rounded-2xl shadow-md">
+            <h3 className="font-bold text-lg mb-4 text-[#1e1e1e]">
+              Request Reschedule
             </h3>
             <textarea
-              className="w-full p-3 border rounded-lg mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 border border-[#e9ecef] rounded-lg mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#a5d8ff]"
               rows={4}
-              placeholder="Please provide reason for rescheduling..."
+              placeholder="Provide reason for rescheduling..."
             />
-            <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium w-full transition-colors">
+            <button className="bg-[#a5d8ff] hover:bg-[#ffec99] text-[#1e1e1e] font-semibold px-6 py-2 rounded-xl w-full transition">
               Submit Request
             </button>
           </div>
 
           {/* Announcements */}
-          <div className="bg-pink-200 p-6 rounded-2xl shadow-sm">
-            <h3 className="font-bold text-gray-900 mb-4">Announcements</h3>
+          <div className="bg-[#ffc9c9] p-6 rounded-2xl shadow-md">
+            <h3 className="font-bold text-lg mb-4 text-[#1e1e1e]">
+              Announcements
+            </h3>
             <div className="space-y-3">
-              <div className="bg-white/70 p-3 rounded-lg shadow-sm">
-                <p className="text-sm font-medium">
-                  Next class: Advanced React Patterns
-                </p>
-                <p className="text-xs text-gray-600">Tomorrow at 3:00 PM</p>
-              </div>
-              <div className="bg-white/70 p-3 rounded-lg shadow-sm">
-                <p className="text-sm font-medium">Assignment deadline reminder</p>
-                <p className="text-xs text-gray-600">Due in 3 days</p>
-              </div>
-              <div className="bg-white/70 p-3 rounded-lg shadow-sm">
-                <p className="text-sm font-medium">
-                  New course materials uploaded
-                </p>
-                <p className="text-xs text-gray-600">Check your dashboard</p>
-              </div>
+              {[
+                { title: 'Next class: Advanced React Patterns', time: 'Tomorrow at 3:00 PM' },
+                { title: 'Assignment deadline reminder', time: 'Due in 3 days' },
+                { title: 'New course materials uploaded', time: 'Check your dashboard' },
+              ].map((note, i) => (
+                <div
+                  key={i}
+                  className="bg-[#ffffff] p-3 rounded-xl shadow-sm border border-[#e9ecef]"
+                >
+                  <p className="text-sm font-medium">{note.title}</p>
+                  <p className="text-xs text-[#495057]">{note.time}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

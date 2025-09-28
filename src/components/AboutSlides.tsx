@@ -1,6 +1,5 @@
-// AboutSlides.tsx
 import React, { useState, useEffect } from 'react';
-import { Play } from 'lucide-react';
+import { Play, Plus, Minus, Star, ChevronRight, Users, Video, Brain, FileText } from 'lucide-react';
 
 interface AboutSlidesProps {
   onLogin: () => void;
@@ -10,6 +9,7 @@ export const AboutSlides: React.FC<AboutSlidesProps> = ({ onLogin }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [typedText, setTypedText] = useState('');
   const fullText = "Hi! I am Rishika!";
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
   // Typing animation effect
   useEffect(() => {
@@ -30,103 +30,184 @@ export const AboutSlides: React.FC<AboutSlidesProps> = ({ onLogin }) => {
   }, [currentSlide]);
 
   const testimonials = [
-    "Amazing courses that helped me land my dream job!",
-    "The AI tools are incredibly helpful for learning.",
-    "Rishika's teaching style is exceptional and engaging.",
-    "Best investment I made for my career development."
+    { text: "Amazing courses that helped me land my dream job!", rating: 5 },
+    { text: "The AI tools are incredibly helpful for learning.", rating: 5 },
+    { text: "Rishika's teaching style is exceptional and engaging.", rating: 4 },
+    { text: "Best investment I made for my career development.", rating: 5 }
   ];
 
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const testimonialsRow2 = [
+    { text: "The personalized mentoring changed my career path completely!", rating: 5 },
+    { text: "Interactive coding environments made learning so much easier.", rating: 4 },
+    { text: "Live classes are engaging and well-structured.", rating: 5 },
+    { text: "The community support is incredible and motivating.", rating: 4 }
+  ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
+  const testimonialsRow3 = [
+    { text: "Certificates helped me get recognition at my workplace.", rating: 5 },
+    { text: "The AI Hub tools boosted my productivity significantly.", rating: 4 },
+    { text: "Offline access feature is perfect for my schedule.", rating: 5 },
+    { text: "30-day guarantee shows confidence in their quality.", rating: 5 }
+  ];
+
+  const services = [
+    {
+      icon: <Video className="w-8 h-8" />,
+      title: "Pre-Recorded Courses",
+      description: "Comprehensive courses on latest technologies and tools with lifetime access and regular updates.",
+      color: "#a5d8ff"
+    },
+    {
+      icon: <Users className="w-8 h-8" />,
+      title: "Live Classes",
+      description: "One-on-one or small group sessions tailored to your learning needs with expert instructors.",
+      color: "#ffec99"
+    },
+    {
+      icon: <Brain className="w-8 h-8" />,
+      title: "AI Hub Access",
+      description: "Cutting-edge AI tools to maximize your learning and boost productivity with exclusive features.",
+      color: "#ffc9c9"
+    },
+    {
+      icon: <FileText className="w-8 h-8" />,
+      title: "Study Resources",
+      description: "Access to PYQs, cheatsheets, and comprehensive materials for your field of study.",
+      color: "#fff4e6"
+    }
+  ];
 
   const faqs = [
-    "How do I get started with the courses?",
-    "What are the prerequisites for AI courses?",
-    "Can I access courses offline?",
-    "Do you offer one-on-one mentoring?",
-    "What's included in the AI Hub?",
-    "How often are live classes conducted?",
-    "Can I get a refund if I'm not satisfied?",
-    "Do you provide certificates upon completion?"
+    {
+      question: "How do I get started with the courses?",
+      answer: "Getting started is easy! Simply sign up for an account, browse our course catalog, and enroll in the courses that interest you. All courses come with detailed prerequisites and learning paths."
+    },
+    {
+      question: "What are the prerequisites for AI courses?",
+      answer: "Most of our AI courses require basic programming knowledge in Python. We also offer beginner-friendly courses that start from the fundamentals. Check each course description for specific requirements."
+    },
+    {
+      question: "Can I access courses offline?",
+      answer: "Yes! Once you enroll, you can download course materials and videos for offline viewing. However, some interactive elements and live sessions require an internet connection."
+    },
+    {
+      question: "Do you offer one-on-one mentoring?",
+      answer: "Absolutely! We provide personalized mentoring sessions with industry experts. You can book one-on-one sessions or join small group mentoring programs based on your learning goals."
+    },
+    {
+      question: "What's included in the AI Hub?",
+      answer: "The AI Hub includes access to cutting-edge AI tools, interactive coding environments, project templates, and exclusive resources to boost your productivity and learning experience."
+    },
+    {
+      question: "How often are live classes conducted?",
+      answer: "Live classes are conducted weekly for most courses. We also offer intensive bootcamps with daily sessions. All live classes are recorded and available for later viewing."
+    },
+    {
+      question: "Can I get a refund if I'm not satisfied?",
+      answer: "Yes, we offer a 30-day money-back guarantee. If you're not completely satisfied with your course within the first 30 days, we'll provide a full refund, no questions asked."
+    },
+    {
+      question: "Do you provide certificates upon completion?",
+      answer: "Yes! You'll receive a verified digital certificate upon successful completion of each course. These certificates are recognized by industry partners and can be shared on LinkedIn."
+    }
   ];
+
+  const toggleFAQ = (index: number) => {
+    setOpenFAQ(openFAQ === index ? null : index);
+  };
+
+  const renderStars = (rating: number) => {
+    return Array.from({ length: 5 }).map((_, i) => (
+      <Star
+        key={i}
+        className={`w-4 h-4 ${i < rating ? 'fill-current text-yellow-500' : 'text-gray-300'}`}
+      />
+    ));
+  };
 
   return (
     <div className="h-screen overflow-y-scroll scroll-smooth snap-y snap-mandatory">
-      {/* Slide 1: Hero/About (portrait video on left for md+) */}
-      <div className="h-screen flex items-center justify-center bg-gray-50 snap-start">
-        <div className="w-full px-6 md:px-8 lg:px-12">
-          <div className="w-full flex flex-col md:flex-row items-start md:items-center gap-12">
-            {/* Left: portrait video placeholder (phone-like on md+) */}
-            <div className="w-full md:flex-none md:w-[360px] md:h-[640px]">
-              <div className="bg-gray-100 border-2 border-gray-300 rounded-2xl h-64 md:h-full w-full flex items-center justify-center mx-auto">
-                <div className="text-center text-gray-600">
-                  <Play className="w-12 h-12 mx-auto mb-4" />
-                  <p className="text-sm">Video with diff<br />thumbnail<br />in<br />portrait<br />design</p>
+      {/* Slide 1: Hero/About */}
+      <div className="h-screen flex items-center justify-center snap-start" style={{ backgroundColor: '#e9ecef' }}>
+        <div className="w-full max-w-7xl px-6 md:px-8 lg:px-12">
+          <div className="w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            {/* Left: Video Section */}
+            <div className="w-full lg:w-2/5">
+              <div 
+                className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white"
+                style={{ backgroundColor: '#1e1e1e' }}
+              >
+                <div className="aspect-[9/16] flex items-center justify-center">
+                  <div className="text-center text-white p-8">
+                    <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style={{ backgroundColor: '#ff8787' }}>
+                      <Play className="w-8 h-8 ml-1" />
+                    </div>
+                    <p className="text-lg font-semibold mb-2">Welcome Video</p>
+                    <p className="text-sm opacity-80">Portrait design with custom thumbnail</p>
+                  </div>
+                </div>
+                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-2xl" style={{ backgroundColor: '#a5d8ff' }}>
+                  <p className="text-sm font-medium text-center text-gray-900">Click to play introduction</p>
                 </div>
               </div>
             </div>
 
-            {/* Right: content */}
-            <div className="flex-1">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 min-h-[2.5rem]">
-                {typedText}
-                <span className="animate-pulse">|</span>
-              </h2>
+            {/* Right: Content */}
+            <div className="w-full lg:w-3/5">
+              {/* EduPilot Branding - positioned above the white card */}
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg" style={{ backgroundColor: '#ff8787' }}>
+                  <span className="text-white font-bold text-xl">R</span>
+                </div>
+                <span className="text-2xl font-bold" style={{ color: '#1e1e1e' }}>EduPilot</span>
+              </div>
 
-              <div className="bg-gray-900 text-white p-8 rounded-2xl">
-                <h3 className="text-xl font-semibold mb-4">About Me</h3>
-                <p className="text-gray-300 mb-8 leading-relaxed">
-                  Welcome to my learning platform! I'm passionate about helping students
-                  master cutting-edge technologies and AI tools. Join thousands of learners
-                  who have transformed their careers with our comprehensive courses.
-                  Welcome to my learning platform! I'm passionate about helping students
-                  master cutting-edge technologies and AI tools. Join thousands of learners
-                  who have transformed their careers with our comprehensive courses.
-                  Welcome to my learning platform! I'm passionate about helping students
-                  master cutting-edge technologies and AI tools. Join thousands of learners
-                  who have transformed their careers with our comprehensive courses.
-                  Welcome to my learning platform! I'm passionate about helping students
-                  master cutting-edge technologies and AI tools. Join thousands of learners
-                  who have transformed their careers with our comprehensive courses.
-                  Welcome to my learning platform! I'm passionate about helping students
-                  master cutting-edge technologies and AI tools. Join thousands of learners
-                  who have transformed their careers with our comprehensive courses.
-                  Welcome to my learning platform! I'm passionate about helping students
-                  master cutting-edge technologies and AI tools. Join thousands of learners
-                  who have transformed their careers with our comprehensive courses.
-                  Welcome to my learning platform! I'm passionate about helping students
-                  master cutting-edge technologies and AI tools. Join thousands of learners
-                  who have transformed their careers with our comprehensive courses.
-                  Welcome to my learning platform! I'm passionate about helping students
-                  master cutting-edge technologies and AI tools. Join thousands of learners
-                  who have transformed their careers with our comprehensive courses.
-                  Welcome to my learning platform! I'm passionate about helping students
-                  master cutting-edge technologies and AI tools. Join thousands of learners
-                  who have transformed their careers with our comprehensive courses.
-                  Welcome to my learning platform! I'm passionate about helping students
-                  master cutting-edge technologies and AI tools. Join thousands of learners
-                  who have transformed their careers with our comprehensive courses.
-                </p>
+              <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-2xl border-4 border-white">
+                <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-gray-900 min-h-[3rem]">
+                  {typedText}
+                  <span className="animate-pulse">|</span>
+                </h2>
 
-                <div className="flex gap-4">
-                  <button
-                    onClick={onLogin}
-                    className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
-                  >
-                    Login
-                  </button>
-                  <button
-                    onClick={onLogin}
-                    className="px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-gray-900 rounded-lg font-medium transition-colors"
-                  >
-                    Sign up
-                  </button>
+                <div className="space-y-6">
+                  <div className="p-6 rounded-2xl" style={{ backgroundColor: '#a5d8ff' }}>
+                    <h3 className="text-2xl font-bold mb-4 text-gray-900">About Me</h3>
+                    <p className="text-gray-800 leading-relaxed">
+                      Welcome to my learning platform! I'm passionate about helping students master cutting-edge 
+                      technologies and AI tools. With years of industry experience and a proven track record in 
+                      education, I've created a . Welcome to my learning platform! I'm passionate about helping students master cutting-edge 
+                      technologies and AI tools. With years of industry experience and a proven track record in 
+                      education, I've created a comprehensive learning ecosystem that combines theoretical knowledge 
+                      with practical applications.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-4 rounded-2xl" style={{ backgroundColor: '#ffec99' }}>
+                      <div className="text-2xl font-bold text-gray-900">10K+</div>
+                      <div className="text-sm text-gray-700">Students</div>
+                    </div>
+                    <div className="text-center p-4 rounded-2xl" style={{ backgroundColor: '#ffc9c9' }}>
+                      <div className="text-2xl font-bold text-gray-900">50+</div>
+                      <div className="text-sm text-gray-700">Courses</div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button
+                      onClick={onLogin}
+                      className="flex-1 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                      style={{ backgroundColor: '#1e1e1e', color: '#ffffff' }}
+                    >
+                      Get Started
+                    </button>
+                    <button
+                      onClick={onLogin}
+                      className="flex-1 px-8 py-4 rounded-xl font-semibold text-lg border-2 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                      style={{ borderColor: '#1e1e1e', color: '#1e1e1e', backgroundColor: 'transparent' }}
+                    >
+                      Learn More
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -134,149 +215,295 @@ export const AboutSlides: React.FC<AboutSlidesProps> = ({ onLogin }) => {
         </div>
       </div>
 
-      {/* Slide 2: Services (full-bleed) */}
-      <div className="h-screen flex items-center justify-center bg-white snap-start">
-        <div className="w-full px-6 md:px-8 lg:px-12">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-12">
-              <div className="w-8 h-8 bg-gray-900 rounded-full"></div>
-              <span className="text-lg font-medium text-gray-700">SITE LOGO AND SITE NAME</span>
+      {/* Slide 2: Services */}
+      <div className="h-screen flex items-center justify-center snap-start" style={{ backgroundColor: '#ffffff' }}>
+        <div className="w-full max-w-7xl px-6 md:px-8 lg:px-12">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: '#ff8787' }}>
+                <span className="text-white font-bold text-lg">R</span>
+              </div>
+              <span className="text-xl font-bold" style={{ color: '#1e1e1e' }}>EduPilot</span>
             </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+              What We Offer
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Comprehensive learning solutions designed to accelerate your career growth and skill development
+            </p>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">
-            What we have got to offer?
-          </h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 px-4 md:px-0">
-            <div className="bg-blue-200 p-8 rounded-2xl text-center">
-              <p className="text-gray-800 text-sm leading-relaxed">
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-              </p>
-            </div>
-            <div className="bg-yellow-200 p-8 rounded-2xl text-center">
-              <p className="text-gray-800 text-sm leading-relaxed">
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Providing for live one to one or all 3 group classes, tailored according to your needs.
-              </p>
-            </div>
-            <div className="bg-green-200 p-8 rounded-2xl text-center">
-              <p className="text-gray-800 text-sm leading-relaxed">
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.Gain access to cutting edge AI tools, to max your exams and boost your productivity.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-              </p>
-            </div>
-            <div className="bg-pink-200 p-8 rounded-2xl text-center">
-              <p className="text-gray-800 text-sm leading-relaxed">
-                Get access to all PYQs and cheatsheets related to your field.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-                Pre Recorded courses on latest technologies and Tools.
-              </p>
-            </div>
+          {/* Services Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="rounded-2xl p-6 shadow-lg border-2 border-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                style={{ backgroundColor: service.color }}
+              >
+                <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center mb-4 shadow-md">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-gray-900">{service.title}</h3>
+                <p className="text-gray-700 text-sm leading-relaxed">{service.description}</p>
+              </div>
+            ))}
           </div>
 
+          {/* CTA */}
           <div className="text-center">
-            <button className="bg-gray-900 text-white px-12 py-4 rounded-xl font-semibold text-lg hover:bg-gray-800 transition-colors">
-              Join us now!
+            <button 
+              className="px-12 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              style={{ backgroundColor: '#1e1e1e', color: '#ffffff' }}
+            >
+              Explore All Courses <ChevronRight className="w-5 h-5 inline ml-2" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Slide 3: Testimonials (full-bleed) */}
-      <div className="h-screen flex items-center justify-center bg-gray-50 snap-start">
-        <div className="w-full px-6 md:px-8 lg:px-12">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-12">
-              <div className="w-8 h-8 bg-gray-900 rounded-full"></div>
-              <span className="text-lg font-medium text-gray-700">SITE LOGO AND SITE NAME</span>
+      {/* Slide 3: Testimonials */}
+      <div className="h-screen flex items-center justify-center snap-start" style={{ backgroundColor: '#e9ecef' }}>
+        <div className="w-full max-w-7xl px-6 md:px-8 lg:px-12">
+          {/* Header - Fixed with proper spacing */}
+          <div className="text-center mb-12 relative z-10">
+            <div className="flex items-center justify-center gap-3 mb-6 mt-16">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: '#ff8787' }}>
+                <span className="text-white font-bold text-lg">R</span>
+              </div>
+              <span className="text-xl font-bold" style={{ color: '#1e1e1e' }}>EduPilot</span>
+            </div>
+
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+              Student Success Stories
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Join thousands of learners who have transformed their careers with our programs
+            </p>
+          </div>
+
+          {/* Testimonial Rows - Adjusted spacing */}
+          <div className="space-y-6 mb-8">
+            {/* First Row */}
+            <div className="overflow-hidden">
+              <div className="flex animate-slide space-x-6 w-max">
+                {[...testimonials, ...testimonials].map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className="w-80 flex-shrink-0 bg-white p-6 rounded-2xl shadow-lg border-2 border-white"
+                  >
+                    <div className="flex mb-3">
+                      {renderStars(testimonial.rating)}
+                    </div>
+                    <p className="text-gray-800 mb-4 italic text-sm leading-relaxed">
+                      "{testimonial.text}"
+                    </p>
+                    <p className="text-gray-600 font-semibold text-sm">
+                      Student {index % testimonials.length + 1}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Second Row */}
+            <div className="overflow-hidden">
+              <div className="flex animate-slide-reverse space-x-6 w-max">
+                {[...testimonialsRow2, ...testimonialsRow2].map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className="w-80 flex-shrink-0 p-6 rounded-2xl shadow-lg border-2 border-white"
+                    style={{ backgroundColor: '#ffec99' }}
+                  >
+                    <div className="flex mb-3">
+                      {renderStars(testimonial.rating)}
+                    </div>
+                    <p className="text-gray-800 mb-4 italic text-sm leading-relaxed">
+                      "{testimonial.text}"
+                    </p>
+                    <p className="text-gray-600 font-semibold text-sm">
+                      Student {index % testimonialsRow2.length + 5}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Third Row */}
+            <div className="overflow-hidden">
+              <div className="flex animate-slide space-x-6 w-max">
+                {[...testimonialsRow3, ...testimonialsRow3].map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className="w-80 flex-shrink-0 p-6 rounded-2xl shadow-lg border-2 border-white"
+                    style={{ backgroundColor: '#ffc9c9' }}
+                  >
+                    <div className="flex mb-3">
+                      {renderStars(testimonial.rating)}
+                    </div>
+                    <p className="text-gray-800 mb-4 italic text-sm leading-relaxed">
+                      "{testimonial.text}"
+                    </p>
+                    <p className="text-gray-600 font-semibold text-sm">
+                      Student {index % testimonialsRow3.length + 9}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">
-            What do students say about us?
-          </h2>
-
-          <div className="bg-yellow-200 p-16 rounded-2xl mb-12 min-h-[300px] flex items-center justify-center">
-            <div className="text-center">
-              <p className="text-2xl md:text-3xl font-medium text-gray-800 mb-8 transition-opacity duration-500">
-                "{testimonials[currentTestimonial]}"
-              </p>
-              <p className="text-gray-600 uppercase tracking-wide text-sm">
-                Automatic slide show of testimonials of students
-              </p>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <button className="bg-gray-900 text-white px-12 py-4 rounded-xl font-semibold text-lg hover:bg-gray-800 transition-colors">
-              Join us now!
+          {/* CTA */}
+          <div className="text-center relative z-10">
+            <button 
+              className="px-12 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              style={{ backgroundColor: '#1e1e1e', color: '#ffffff' }}
+            >
+              Join Our Community <ChevronRight className="w-5 h-5 inline ml-2" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Slide 4: FAQ (full-bleed) */}
-      <div className="h-screen flex items-center justify-center bg-white snap-start">
-        <div className="w-full px-6 md:px-8 lg:px-12">
-          <div className="grid md:grid-cols-2 gap-12 h-full items-center">
-            <div className="bg-gray-100 p-8 rounded-2xl">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-gray-900">
-                FREQUENTLY<br />
-                ASKED<br />
-                QUESTIONS
-              </h2>
-              <button className="bg-gray-900 text-white px-8 py-3 rounded-xl font-semibold hover:bg-gray-800 transition-colors">
-                Join Now
-              </button>
-            </div>
+      {/* Slide 4: FAQ Section */}
+      <div className="h-screen flex items-center justify-center snap-start p-8" style={{ backgroundColor: '#e9ecef' }}>
+        <div className="w-full max-w-6xl">
+          <div className="relative">
+            {/* Main FAQ Container */}
+            <div className="relative rounded-3xl p-8 lg:p-12 shadow-2xl border-4 border-white" style={{ backgroundColor: '#ffffff' }}>
+              <div className="grid lg:grid-cols-5 gap-12">
+                
+                {/* Left Panel */}
+                <div className="lg:col-span-2 flex flex-col justify-center space-y-8">
+                  {/* EduPilot Branding */}
+                  <div className="flex items-center justify-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg" style={{ backgroundColor: '#ff8787' }}>
+                      <span className="text-white font-bold text-lg">R</span>
+                    </div>
+                    <span className="text-xl font-bold" style={{ color: '#1e1e1e' }}>EduPilot</span>
+                  </div>
 
-            <div className="space-y-4">
-              <h3 className="text-2xl font-bold mb-8 text-gray-900">LIST OF QUESTIONS</h3>
-              {faqs.map((faq, index) => (
-                <div key={index} className="py-4 px-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
-                  <p className="text-gray-800">{faq}</p>
+                  <div className="space-y-4">
+                    <h2 className="text-5xl lg:text-6xl font-black text-gray-900 leading-tight">
+                      Frequently
+                    </h2>
+                    <h2 className="text-5xl lg:text-6xl font-black text-gray-900 leading-tight">
+                      Asked
+                    </h2>
+                    <h2 className="text-5xl lg:text-6xl font-black text-gray-900 leading-tight">
+                      Questions
+                    </h2>
+                  </div>
+                  
+                  <div className="flex flex-col space-y-4">
+                    <button 
+                      onClick={onLogin}
+                      className="px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg self-start"
+                      style={{ backgroundColor: '#1e1e1e', color: '#ffffff' }}
+                    >
+                      Get Started Today
+                    </button>
+                    <p className="text-gray-600 font-medium">
+                      Everything you need to know about our platform
+                    </p>
+                  </div>
                 </div>
-              ))}
+
+                {/* Right Panel */}
+                <div className="lg:col-span-3">
+                  <div className="rounded-2xl h-full flex flex-col">
+                    <div className="space-y-4 max-h-[500px] overflow-y-auto pr-4">
+                      {faqs.map((faq, index) => (
+                        <div
+                          key={index}
+                          className={`transition-all duration-300 cursor-pointer rounded-xl overflow-hidden border-2 ${
+                            openFAQ === index 
+                              ? 'border-gray-300 shadow-lg' 
+                              : 'border-gray-100 hover:border-gray-200'
+                          }`}
+                          style={{ 
+                            backgroundColor: openFAQ === index ? '#f8f9fa' : '#ffffff'
+                          }}
+                          onClick={() => toggleFAQ(index)}
+                        >
+                          <div className="p-6">
+                            <div className="flex justify-between items-start gap-4">
+                              <span className={`font-semibold pr-4 transition-all duration-300 flex-1 ${
+                                openFAQ === index 
+                                  ? 'text-gray-900' 
+                                  : 'text-gray-800 hover:text-gray-900'
+                              }`}>
+                                {faq.question}
+                              </span>
+                              <div className={`flex-shrink-0 transition-all duration-300 transform ${
+                                openFAQ === index ? 'rotate-45' : ''
+                              } w-8 h-8 rounded-lg flex items-center justify-center`}
+                              style={{ 
+                                backgroundColor: openFAQ === index ? '#ff8787' : '#e9ecef',
+                                color: openFAQ === index ? '#ffffff' : '#1e1e1e'
+                              }}>
+                                <Plus className="w-4 h-4" />
+                              </div>
+                            </div>
+                            
+                            {/* Answer */}
+                            <div className={`overflow-hidden transition-all duration-500 ${
+                              openFAQ === index ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
+                            }`}>
+                              <div className="pt-4 border-t border-gray-200">
+                                <p className="text-gray-700 leading-relaxed">
+                                  {faq.answer}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Footer */}
+                    <div className="pt-8 mt-4 border-t border-gray-200 text-center">
+                      <p className="text-gray-600 mb-4">
+                        Still have questions?
+                      </p>
+                      <button 
+                        onClick={onLogin}
+                        className="px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                        style={{ backgroundColor: '#a5d8ff', color: '#1e1e1e' }}
+                      >
+                        Contact Support
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          @keyframes slide-reverse {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+          }
+          .animate-slide {
+            animation: slide 30s linear infinite;
+            width: max-content;
+          }
+          .animate-slide-reverse {
+            animation: slide-reverse 25s linear infinite;
+            width: max-content;
+          }
+        `
+      }} />
     </div>
   );
 };

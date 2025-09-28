@@ -13,10 +13,19 @@ import {
   Star,
   ArrowRight,
   Activity,
+  Sparkles,
+  ChevronRight,
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin
 } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
-  const [userName] = useState('User Name');
+  const [userName] = useState('Rishika');
   const [jiggle, setJiggle] = useState(false);
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
 
@@ -84,22 +93,48 @@ export const HomePage: React.FC = () => {
     }
   };
 
+  const getCurrentGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good Morning';
+    if (hour < 17) return 'Good Afternoon';
+    return 'Good Evening';
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Spacer for fixed navbar */}
       <div className="h-20 md:h-28"></div>
 
       <div className="container mx-auto px-6 py-10">
-        {/* Greeting */}
-        <div className="text-center py-10 bg-yellow-50 rounded-xl shadow mb-8">
-          <h1
-            className={`text-2xl font-bold mb-4 transition-transform ${jiggle ? 'animate-bounce' : ''}`}
-          >
-            Hi {userName}! What are you upto today?
-          </h1>
-          <button className="bg-yellow-300 hover:bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold shadow transition">
-            Take A Tour
-          </button>
+        {/* Improved Greeting Section */}
+        <div className="bg-white border-2 border-black rounded-3xl shadow-lg mb-8">
+          <div className="px-8 py-12 text-center">
+            <div className={`inline-flex items-center mb-4 ${jiggle ? 'animate-pulse' : ''}`}>
+              <span className="text-lg font-medium text-gray-700">{getCurrentGreeting()}</span>
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black">
+              Welcome back, <span style={{ color: "#000000ff" }}>{userName}!</span>
+            </h1>
+            
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                className="text-black hover:opacity-90 px-8 py-4 rounded-full font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center"
+                style={{ backgroundColor: "#ffd43b" }}
+              >
+                <Play className="w-5 h-5 mr-2" />
+                Continue Learning
+              </button>
+              <button className="bg-transparent border-2 border-black text-black hover:bg-black hover:text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                Take Platform Tour
+                <ChevronRight className="w-5 h-5 ml-2" />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Announcements */}
@@ -187,34 +222,83 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Achievement */}
-        <div className="bg-gradient-to-r from-yellow-300 to-orange-300 p-6 rounded-xl text-center mb-8 shadow">
-          <h2 className="text-xl font-bold flex justify-center items-center mb-2">
-            <Award className="mr-2" /> Latest Achievement
-          </h2>
-          <p>Congratulations! You've earned the "Consistent Learner" badge! 🎉</p>
-        </div>
+      {/* Footer */}
+      <footer className="bg-[#1e1e1e] text-white border-2 border-black rounded-3xl shadow-2xl mx-6 my-10">
+        <div className="container mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Company Info */}
+            <div className="space-y-4">
+              <h3 className="text-2xl font-bold text-white">LearnHub</h3>
+              <p className="text-gray-300 text-sm">
+                Empowering learners worldwide with innovative educational experiences and cutting-edge technology.
+              </p>
+              <div className="flex space-x-4">
+                <Facebook className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition" />
+                <Twitter className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition" />
+                <Instagram className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition" />
+                <Linkedin className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition" />
+              </div>
+            </div>
 
-        {/* Quick Actions */}
-        <div className="bg-white/80 p-8 rounded-xl shadow text-center">
-          <h2 className="text-xl font-bold mb-6">Quick Actions</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <button className="bg-blue-500 text-white p-4 rounded-lg shadow hover:scale-105 transition">
-              Start Learning
-            </button>
-            <button className="bg-green-500 text-white p-4 rounded-lg shadow hover:scale-105 transition">
-              Join Group
-            </button>
-            <button className="bg-purple-500 text-white p-4 rounded-lg shadow hover:scale-105 transition">
-              Track Progress
-            </button>
-            <button className="bg-red-500 text-white p-4 rounded-lg shadow hover:scale-105 transition">
-              Notifications
-            </button>
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="text-gray-300 hover:text-white transition">Courses</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-white transition">Dashboard</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-white transition">Community</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-white transition">Certificates</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-white transition">Help Center</a></li>
+              </ul>
+            </div>
+
+            {/* Support */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="text-gray-300 hover:text-white transition">FAQ</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-white transition">Contact Us</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-white transition">Technical Support</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-white transition">Privacy Policy</a></li>
+                <li><a href="#" className="text-gray-300 hover:text-white transition">Terms of Service</a></li>
+              </ul>
+            </div>
+
+            {/* Contact Info */}
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Contact</h4>
+              <div className="space-y-3 text-sm">
+                <div className="flex items-center">
+                  <Mail className="w-4 h-4 mr-2 text-gray-400" />
+                  <span className="text-gray-300">support@learnhub.com</span>
+                </div>
+                <div className="flex items-center">
+                  <Phone className="w-4 h-4 mr-2 text-gray-400" />
+                  <span className="text-gray-300">+1 (555) 123-4567</span>
+                </div>
+                <div className="flex items-center">
+                  <MapPin className="w-4 h-4 mr-2 text-gray-400" />
+                  <span className="text-gray-300">San Francisco, CA</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">
+              © 2024 LearnHub. All rights reserved.
+            </p>
+            <div className="flex space-x-6 text-sm text-gray-400 mt-4 md:mt-0">
+              <a href="#" className="hover:text-white transition">Privacy</a>
+              <a href="#" className="hover:text-white transition">Terms</a>
+              <a href="#" className="hover:text-white transition">Accessibility</a>
+            </div>
           </div>
         </div>
-      </div>
+      </footer>
 
       {/* Chatbot */}
       <div className="fixed bottom-8 right-8 z-40">
