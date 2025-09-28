@@ -38,30 +38,30 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
   return (
     <>
       {/* Desktop Navigation */}
-      <div className="fixed top-6 left-6 right-6 z-50 hidden md:block">
+      <div className="fixed top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 z-50 hidden md:block">
         <div className="flex items-center justify-between">
           {/* Site Logo and Name - Left Side */}
           <div className={`flex items-center gap-3 transition-opacity duration-300 ${
             isScrolled ? 'opacity-60' : 'opacity-100'
           }`}>
-            <div className="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center">
-              <User className="w-5 h-5 text-white" />
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gray-900 rounded-full flex items-center justify-center">
+              <User className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <span className="text-gray-900 text-lg font-bold">EduPilot</span>
+            <span className="text-gray-900 text-base sm:text-lg font-bold">EduPilot</span>
           </div>
 
           {/* Navigation Pills - Right Side */}
-          <nav className={`rounded-full px-6 py-3 shadow-lg transition-all duration-300 ${
+          <nav className={`rounded-full px-4 sm:px-6 py-2 sm:py-3 shadow-lg transition-all duration-300 ${
             isScrolled 
               ? 'bg-gray-900/70 backdrop-blur-md border border-gray-700/50' 
               : 'bg-gray-900'
           }`}>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handlePageChange(item.id)}
-                  className={`px-4 py-2 text-sm font-bold rounded-full transition-all duration-200 ${
+                  className={`px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-bold rounded-full transition-all duration-200 ${
                     currentPage === item.id
                       ? isScrolled
                         ? 'bg-white/90 text-gray-900'
@@ -77,7 +77,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
               
               <button
                 onClick={onLogout}
-                className={`px-4 py-2 text-sm font-bold rounded-full transition-all duration-200 ${
+                className={`px-2 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm font-bold rounded-full transition-all duration-200 ${
                   isScrolled
                     ? 'text-white/90 hover:bg-white/20'
                     : 'text-white hover:bg-gray-700'
@@ -92,19 +92,19 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
 
       {/* Mobile Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 md:hidden">
-        <div className={`px-4 py-3 shadow-lg transition-all duration-300 ${
+        <div className={`px-3 sm:px-4 py-2 sm:py-3 shadow-lg transition-all duration-300 ${
           isScrolled
             ? 'bg-gray-900/80 backdrop-blur-md border-b border-gray-700/30'
             : 'bg-gray-900'
         }`}>
           <div className="flex items-center justify-between">
-            <div className={`flex items-center gap-3 transition-opacity duration-300 ${
+            <div className={`flex items-center gap-2 sm:gap-3 transition-opacity duration-300 ${
               isScrolled ? 'opacity-80' : 'opacity-100'
             }`}>
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                <User className="w-5 h-5 text-gray-900" />
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-full flex items-center justify-center">
+                <User className="w-4 h-4 sm:w-5 sm:h-5 text-gray-900" />
               </div>
-              <span className={`text-sm font-bold transition-colors duration-300 ${
+              <span className={`text-xs sm:text-sm font-bold transition-colors duration-300 ${
                 isScrolled ? 'text-white/90' : 'text-white'
               }`}>EduPilot</span>
             </div>
@@ -115,24 +115,24 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
                 isScrolled ? 'text-white/90' : 'text-white'
               }`}
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
             </button>
           </div>
         </div>
 
         {/* Mobile Menu Overlay */}
         {isMobileMenuOpen && (
-          <div className={`px-4 py-4 shadow-lg transition-all duration-300 ${
+          <div className={`px-3 sm:px-4 py-3 sm:py-4 shadow-lg transition-all duration-300 ${
             isScrolled
               ? 'bg-gray-900/90 backdrop-blur-md'
               : 'bg-gray-900'
           }`}>
-            <div className="space-y-2">
+            <div className="space-y-1 sm:space-y-2">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handlePageChange(item.id)}
-                  className={`block w-full text-left px-4 py-3 text-sm font-bold rounded-lg transition-all duration-200 ${
+                  className={`block w-full text-left px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 ${
                     currentPage === item.id
                       ? isScrolled
                         ? 'bg-white/90 text-gray-900'
@@ -148,7 +148,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
               
               <button
                 onClick={onLogout}
-                className={`block w-full text-left px-4 py-3 text-sm font-bold rounded-lg transition-all duration-200 ${
+                className={`block w-full text-left px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-bold rounded-lg transition-all duration-200 ${
                   isScrolled
                     ? 'text-white/90 hover:bg-white/20'
                     : 'text-white hover:bg-gray-700'
@@ -162,7 +162,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
       </nav>
 
       {/* Spacer for mobile navigation */}
-      <div className="h-16 md:hidden"></div>
+      <div className="h-12 sm:h-16 md:hidden"></div>
     </>
   );
 };
